@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <title>Document</title>
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: "Poppins", sans-serif;
+  }
+  
+  .navbar {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  nav {
+    flex: 1;
+    text-align: center;
+  }
+  
+  nav ul {
+    display: inline-block;
+    list-style-type: none;
+    text-align: center;
+  }
+  
+  nav ul li {
+    display: inline-block;
+    margin-right: 20px;
+  }
+  
+  a {
+    text-decoration: none;
+    color: #555;
+  }
+  
+  p {
+    color: #555;
+  }
+  
+  .container {
+    max-width: 1300px;
+    margin: auto;
+    padding-left: 25px;
+    padding-right: 25px;
+  }
+  
+  .row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+  
+  .col-2 {
+    flex-basis: 50%;
+    min-width: 300px;
+  }
+  
+  .col-2 img {
+    max-width: 100%;
+    padding: 50px 0;
+  }
+  
+  .col-2 h1 {
+    font-size: 50px;
+    line-height: 60px;
+    margin: 25px 0;
+  }
+  
+  .btn {
+ padding: 17px 40px;
+ border-radius: 50px;
+ border: 0;
+ background-color: white;
+ box-shadow: rgb(0 0 0 / 5%) 0 0 8px;
+ letter-spacing: 1.5px;
+ text-transform: uppercase;
+ font-size: 15px;
+ transition: all .5s ease;
+}
+
+.btn:hover {
+ letter-spacing: 3px;
+ background-color: hsl(261deg 80% 48%);
+ color: hsl(0, 0%, 100%);
+ box-shadow: rgb(93 24 220) 0px 7px 29px 0px;
+}
+
+.btn:active {
+ letter-spacing: 3px;
+ background-color: hsl(261deg 80% 48%);
+ color: hsl(0, 0%, 100%);
+ box-shadow: rgb(93 24 220) 0px 0px 0px 0px;
+ transform: translateY(10px);
+ transition: 100ms;
+}
+  
+  .header {
+    background: radial-gradient(#fff, #ffd6d6);
+  }
+  
+  .header .row {
+    margin-top: 70px;
+  }
+  
+  .categories {
+    margin: 70px 0;
+  }
+  
+  .col-3 {
+    flex-basis: 30%;
+    min-width: 250px;
+    margin-bottom: 30px;
+  }
+  
+  .col-3 img {
+    width: 100%;
+  }
+  
+  .small-container {
+    max-width: 1080px;
+    margin: auto;
+    padding-left: 25px;
+    padding-right: 25px;
+  }
+  
+  .col-4 {
+    flex-basis: 25%;
+    padding: 10px;
+    min-width: 200px;
+    margin-bottom: 50px;
+    transition: transform 0.5s;
+  }
+  
+  .col-4 img {
+    width: 100%;
+  }
+  
+  .title {
+    text-align: center;
+    margin: 0 auto 80px;
+    position: relative;
+    line-height: 60px;
+    color: #555;
+  }
+  .title::after {
+    content: "";
+    background: #ff523b;
+    width: 80px;
+    height: 5px;
+    border-radius: 5px;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%);
+  }
+  
+  h4 {
+    color: #555;
+    font-weight: normal;
+  }
+  
+  .col-4 p {
+    font-size: 14px;
+  }
+  
+  .rating .fas {
+    color: #ff523b;
+  }
+  
+  .rating .far {
+    color: #ff523b;
+  }
+  
+  .col-4:hover {
+    transform: translateY(-5px);
+  }
+  
+  /* Offer */
+  
+  .offer {
+    background: radial-gradient(#fff, #ffd6d6);
+    margin-top: 80px;
+    padding: 30px 0;
+  }
+  
+  .col-2 .offer-img {
+    padding: 50px;
+  }
+  
+  small {
+    color: #555;
+  }
+  
+  /* testimonial */
+  
+  .testimonial {
+    padding-top: 100px;
+  }
+  
+  .testimonial .col-3 {
+    text-align: center;
+    padding: 40px 20px;
+    box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.5s;
+  }
+  
+  .testimonial .col-3 img {
+    width: 100px;
+    margin-top: 20px;
+    border-radius: 50%;
+  }
+  
+  .testimonial .col-3:hover {
+    transform: translateY(-10px);
+  }
+  
+  .fa-quote-left {
+    font-size: 34px;
+    color: #ff523b;
+  }
+  
+  .col-3 p {
+    font-size: 14px;
+    margin: 12px 0;
+    color: #777777;
+  }
+  
+  .testimonial .col-3 h3 {
+    font-weight: 600;
+    color: #555;
+    font-size: 16px;
+  }
+  
+  .brands {
+    margin: 100px auto;
+  }
+  
+  .col-5 {
+    width: 160px;
+  }
+  
+  .col-5 img {
+    width: 100%;
+    cursor: pointer;
+    filter: grayscale(100%);
+  }
+  
+  .col-5 img:hover {
+    width: 100%;
+    cursor: pointer;
+    filter: grayscale(0);
+  }
+  
+  /* footer */
+  
+  .footer {
+    background: #000;
+    color: #8a8a8a;
+    font-size: 14px;
+    padding: 60px 0 20px;
+  }
+  
+  .footer p {
+    color: #8a8a8a;
+  }
+  
+  .footer h3 {
+    color: #ffffff;
+    margin-bottom: 20px;
+  }
+  
+  .footer-col-1,
+  .footer-col-2,
+  .footer-col-3,
+  .footer-col-4 {
+    min-width: 250px;
+    margin-bottom: 20px;
+  }
+  
+  .footer-col-1 {
+    flex-basis: 30%;
+  }
+  
+  .footer-col-2 {
+    flex: 1;
+    text-align: center;
+  }
+  
+  .footer-col-2 img {
+    width: 180px;
+    margin-bottom: 20px;
+  }
+  
+  .footer-col-3,
+  .footer-col-4 {
+    flex-basis: 12%;
+    text-align: center;
+  }
+  
+  ul {
+    list-style-type: none;
+  }
+  
+  .app-logo {
+    margin-top: 20px;
+  }
+  .app-logo img {
+    width: 140px;
+    opacity: 0.5;
+  }
+  
+  .footer hr {
+    border: none;
+    background: #b5b5b5;
+    height: 1px;
+    margin: 20px 0;
+  }
+  
+  .copyright {
+    text-align: center;
+  }
+  
+  .menu-icon {
+    width: 28px;
+    margin-left: 20px;
+    display: none;
+    text-align: center;
+  }
+  
+  /* media query for menu */
+  
+  @media only screen and (max-width: 800px) {
+    nav ul {
+      position: absolute;
+      top: 70px;
+      left: 0;
+      background: #333;
+      width: 100%;
+      overflow: hidden;
+      transition: max-height 0.5s;
+    }
+    nav ul li {
+      display: block;
+      margin-right: 50px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+  
+    nav ul li a {
+      color: #fff;
+    }
+    .menu-icon {
+      display: block;
+      cursor: pointer;
+    }
+  }
+  
+  /* all products page */
+  
+  .row-2 {
+    justify-content: space-between;
+    margin: 100px auto 50px;
+  }
+  
+  select {
+    border: 1px solid #ff523b;
+    padding: 5px;
+  }
+  
+  select:focus {
+    outline: none;
+  }
+  
+  .page-btn {
+    margin: 0 auto 80px;
+  }
+  
+  .page-btn span {
+    display: inline-block;
+    border: 1px solid #ff523b;
+    margin-left: 10px;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    cursor: pointer;
+  }
+  
+  .page-btn span:hover {
+    background: #ff523b;
+    color: #ffffff;
+  }
+  
+  /* single product details */
+  
+  .single-product {
+    margin-top: 80px;
+  }
+  
+  .single-product .col-2 img {
+    padding: 0;
+  }
+  
+  .single-product .col-2 {
+    padding: 20px;
+  }
+  
+  .single-product h4 {
+    margin: 20px 0;
+    font-size: 22px;
+    font-weight: bold;
+  }
+  
+  .single-product select {
+    display: block;
+    padding: 10px;
+    margin-top: 20px;
+  }
+  
+  .single-product input {
+    width: 50px;
+    height: 40px;
+    padding-left: 10px;
+    font-size: 20px;
+    margin-right: 10px;
+    border: 1px solid #ff523b;
+  }
+  
+  input:focus {
+    outline: none;
+  }
+  
+  .single-product .fas {
+    color: #ff523b;
+    margin-left: 10px;
+  }
+  
+  .small-img-row {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .small-img-col {
+    flex-basis: 24%;
+    cursor: pointer;
+  }
+  
+  /* cart items */
+  
+  .cart-page {
+    margin: 90px auto;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .cart-info {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  th {
+    text-align: left;
+    padding: 5px;
+    color: #ffffff;
+    background: #ff523b;
+    font-weight: normal;
+  }
+  td {
+    padding: 10px 5px;
+  }
+  
+  td input {
+    width: 40px;
+    height: 30px;
+    padding: 5px;
+  }
+  
+  td a {
+    color: #ff523b;
+    font-size: 12px;
+  }
+  
+  td img {
+    width: 80px;
+    height: 80px;
+    margin-right: 10px;
+  }
+  
+  .total-price {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .total-price table {
+    border-top: 3px solid #ff523b;
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  td:last-child {
+    text-align: right;
+  }
+  
+  th:last-child {
+    text-align: right;
+  }
+  /* account page */
+  .account-page {
+    padding: 50px 0;
+    background: radial-gradient(#fff, #ffd6d6);
+  }
+  
+  .form-container {
+    background: #ffffff;
+    width: 300px;
+    height: 400px;
+    position: relative;
+    text-align: center;
+    padding: 20px 0;
+    margin: auto;
+    box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+  
+  .form-container span {
+    font-weight: bold;
+    padding: 0 10px;
+    color: #555555;
+    cursor: pointer;
+    width: 100px;
+    display: inline-block;
+  }
+  
+  .form-btn {
+    display: inline-block;
+  }
+  
+  .form-container form {
+    max-width: 300px;
+    padding: 0 20px;
+    position: absolute;
+    top: 130px;
+    transition: transform 1s;
+  }
+  
+  form input {
+    width: 100%;
+    height: 30px;
+    margin: 10px 0;
+    padding: 0 10px;
+    border: 1px solid #ccc;
+  }
+  
+  form .btn {
+    width: 100%;
+    border: none;
+    cursor: pointer;
+    margin: 10px 0;
+  }
+  
+  form .btn:focus {
+    outline: none;
+  }
+  
+  #LoginForm {
+    left: -300px;
+  }
+  
+  #RegForm {
+    left: 0;
+  }
+  
+  form a {
+    font-size: 12px;
+  }
+  
+  #Indicator {
+    width: 100px;
+    border: none;
+    background: #ff523b;
+    height: 3px;
+    margin-top: 8px;
+    transform: translateX(100px);
+    transition: transform 1s;
+  }
+  
+  /* media query for less than 600 screen size */
+  
+  @media only screen and (max-width: 600px) {
+    .row {
+      text-align: center;
+    }
+    .col-2,
+    .col-3,
+    .col-4 {
+      flex-basis: 100%;
+    }
+  
+    .single-product .row {
+      text-align: left;
+    }
+  
+    .single-product .col-2 {
+      padding: 20px 0;
+    }
+    .single-product h1 {
+      font-size: 26px;
+      line-height: 32px;
+    }
+    .cart-info p {
+      display: none;
+    }
+  }
+  
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+          <div class="navbar">
+            <div class="logo">
+              <a href="index.html"><img src="https://cdn.logojoy.com/wp-content/uploads/2018/05/30171154/944-768x591.png" alt="RedStore" width="125px" /></a>
+            </div>
+            <nav>
+              <ul id="MenuItems">
+                <li><a href="main"><b>Home</b></a></li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <li><a href="dashboard1"><b>Products</b></a></li>&nbsp;&nbsp;&nbsp;&nbsp;
+                <li><a href="#"><b>About</b></a></li>&nbsp;&nbsp;&nbsp;&nbsp;
+                <li><a href="#"><b>Contact</b></a></li>&nbsp;&nbsp;&nbsp;&nbsp;
+                <li><a href="account"><b>Account</b></a></li>&nbsp;&nbsp;
+              </ul>
+            </nav>&nbsp;&nbsp;
+            <i class="fa fa-user" class="menu-icon" style='font-size:30px' onclick="menu-icon()" ></i><br>
+            <a herf="signup">$</a>  &nbsp;&nbsp;&nbsp;
+            <a href="cart"><img src="https://i.ibb.co/PNjjx3y/cart.png" alt="" width="30px" height="30px" /></a>&nbsp;&nbsp;&nbsp;
+            <i class="fa fa-heart-o"  class="menu-icon" style="font-size:24px"></i>&nbsp;&nbsp;&nbsp;
+            <img src="https://i.ibb.co/6XbqwjD/menu.png" alt="" class="menu-icon" onclick="menutoggle()" />
+            
+          </div>
+          <div class="row">
+            <div class="col-2">
+              <h1>
+                Fashion Collection <br />
+                A New Style! 2023
+              </h1>
+            
+              <a href="#" target="_blank" rel="noopener noreferrer" class="btn">Shop now &#8594;</a>
+            </div>
+            <div class="col-2">
+              <img src="https://d2line.com/thatlook/wp-content/uploads/sites/4/2022/09/women-clothing-fashion-designerstyle-by-d2line.png" alt="" />
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Featured categories -->
+      <div class="categories">
+        <div class="small-container">
+          <div class="row">
+            <div class="col-3">
+              <img src="https://i.ibb.co/sqnY1pG/category-1.jpg" alt="" />
+            </div>
+            <div class="col-3">
+              <img src="https://i.ibb.co/GCJLQRQ/category-2.jpg" alt="" />
+            </div>
+            <div class="col-3">
+              <img src="https://i.ibb.co/wYsXqP5/category-3.jpg" alt="" />
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Featured products -->
+      <div class="small-container">
+        <h2 class="title">Featured Products</h2>
+        <div class="row">
+          <div class="col-4">
+            <a href="product_details.html"><img src="https://i.ibb.co/47Sk9QL/product-1.jpg" alt="" /></a>
+            <a href="product_details.html">
+              <h4>Red Printed T-shirt</h4>
+            </a>
+            <div class="rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="far fa-star"></i>
+            </div>
+            <p>₹500.00</p>
+          </div>
+      
+          <div class="col-4">
+            <img src="https://i.ibb.co/b7ZVzYr/product-2.jpg" alt="" />
+            <h4>Red Printed T-shirt</h4>
+            <div class="rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="far fa-star"></i>
+              <i class="far fa-star"></i>
+            </div>
+            <p>₹500.00</p>
+          </div>
+      
+          <div class="col-4">
+            <img src="https://i.ibb.co/KsMVr26/product-3.jpg" alt="" />
+            <h4>Red Printed T-shirt</h4>
+            <div class="rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star-half-alt"></i>
+            </div>
+            <p>₹500.00</p>
+          </div>
+      
+          <div class="col-4">
+            <img src="https://assets.ajio.com/medias/sys_master/root/20230602/iFtY/64795bf3d55b7d0c633c68ac/-473Wx593H-462329145-green-MODEL.jpg" alt="" />
+            <h4>Red Printed T-shirt</h4>
+            <div class="rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="far fa-star"></i>
+              <i class="far fa-star"></i>
+              <i class="far fa-star"></i>
+            </div>
+            <p>₹500.00</p>
+          </div>
+        </div>
+        <h2 class="title">Latest Products</h2>
+        <div class="row">
+          <div class="col-4">
+            <img src="https://media.istockphoto.com/id/1009480924/photo/photo-portrait-of-attractive-pretty-cute-lovable-fascinating-delicate-alluring-gorgeous-nice.jpg?s=612x612&w=0&k=20&c=OZHf3qtTeweGfo6JtzIKVzF8ptHlHEqbDsLG7WE9NnY=" alt="" />
+            <h4>Red Printed T-shirt</h4>
+            <div class="rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="far fa-star"></i>
+            </div>
+            <p>₹500.00</p>
+          </div>
+      
+          <div class="col-4">
+            <img src="https://img.freepik.com/premium-photo/portrait-smiling-young-man-white-t-shirt-isolated-white_1258-5177.jpg" alt="" />
+            <h4>Red Printed T-shirt</h4>
+            <div class="rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="far fa-star"></i>
+              <i class="far fa-star"></i>
+            </div>
+            <p>₹500.00</p>
+          </div>
+      
+          <div class="col-4">
+            <img src="https://img.freepik.com/premium-photo/fashion-boy-girl-stylish-clothes-colored-wall-b_86390-1599.jpg" alt="" />
+            <h4>Red Printed T-shirt</h4>
+            <div class="rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star-half-alt"></i>
+            </div>
+            <p>₹500.00</p>
+          </div>
+      
+          <div class="col-4">
+            <img src="https://media.istockphoto.com/id/638637448/photo/womens-personal-accessories.jpg?s=612x612&w=0&k=20&c=CYGKDWU3G1TFSWdVRU9dQIpj3H0o8dWLXANuFmvM3z8=" alt="" />
+            <h4>Red Printed T-shirt</h4>
+            <div class="rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="far fa-star"></i>
+              <i class="far fa-star"></i>
+              <i class="far fa-star"></i>
+            </div>
+            <p>₹500.00</p>
+          </div>
+        </div>
+      
+        <div class="row">
+          <div class="col-4">
+            <img src="https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?cs=srgb&dl=pexels-fernando-arcos-190819.jpg&fm=jpg" alt="" />
+            <h4>Red Printed T-shirt</h4>
+            <div class="rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="far fa-star"></i>
+            </div>
+            <p>₹500.00</p>
+          </div>
+      
+          <div class="col-4">
+            <img src="https://images.pexels.com/photos/2857040/pexels-photo-2857040.jpeg?cs=srgb&dl=pexels-gi%C3%A0y-da-tino-2857040.jpg&fm=jpg" alt="" />
+            <h4>Red Printed T-shirt</h4>
+            <div class="rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="far fa-star"></i>
+              <i class="far fa-star"></i>
+            </div>
+            <p>₹500.00</p>
+          </div>
+      
+          <div class="col-4">
+            <img src="https://www.jiomart.com/images/product/original/rvx17o2zhg/wqaao-air-jordan-style-trendy-sneakers-for-men-blue-product-images-rvx17o2zhg-0-202305310800.jpg?im=Resize=(330,410)" alt="" />
+            <h4>Red Printed T-shirt</h4>
+            <div class="rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star-half-alt"></i>
+            </div>
+            <p>₹500.00</p>
+          </div>
+      
+          <div class="col-4">
+            <img src="https://images.dashhudson.com/aHR0cHM6Ly9jZG4uZGFzaGh1ZHNvbi5jb20vbWVkaWEvZnVsbC8xNjgwNjI0MjU1LjQ2MDU2MzIzMDkuanBlZw==.jpg?w=400&h=400&fit=cover" alt="" />
+            <h4>Red Printed T-shirt</h4>
+            <div class="rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="far fa-star"></i>
+              <i class="far fa-star"></i>
+              <i class="far fa-star"></i>
+            </div>
+            <p>₹500.00</p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-4">
+          <img src="https://i.ibb.co/bQ5t8bR/product-5.jpg" alt="" />
+          <h4>Red Printed T-shirt</h4>
+          <div class="rating">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="far fa-star"></i>
+          </div>
+          <p>₹500.00</p>
+        </div>
+    
+        <div class="col-4">
+          <img src="https://i.ibb.co/vVpTyBD/product-6.jpg" alt="" />
+          <h4>Red Printed T-shirt</h4>
+          <div class="rating">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="far fa-star"></i>
+            <i class="far fa-star"></i>
+          </div>
+          <p>₹500.00</p>
+        </div>
+    
+        <div class="col-4">
+          <img src="https://www.shauryasanadhya.com/cdn/shop/articles/one.jpg?v=1577337592" alt="" />
+          <h4>Red Printed T-shirt</h4>
+          <div class="rating">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star-half-alt"></i>
+          </div>
+          <p>₹500.00</p>
+        </div>
+    
+        <div class="col-4">
+          <img src="https://i.ibb.co/QfCgdXZ/product-8.jpg" alt="" />
+          <h4>Red Printed T-shirt</h4>
+          <div class="rating">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="far fa-star"></i>
+            <i class="far fa-star"></i>
+            <i class="far fa-star"></i>
+          </div>
+          <p>₹500.00</p>
+        </div>
+      </div>
+    
+      <!-- offer -->
+      <div class="offer">
+        <div class="small-container">
+          <div class="row">
+            <div class="col-2">
+              <img src="https://i.ibb.co/HF5TncZ/exclusive.png" alt="" class="offer-img" />
+            </div>
+            <div class="col-2">
+              <p>Exclusively Available on RedStore</p>
+              <h1>Smart Band 4</h1>
+              <small>The Mi Smart Band 4 features a 39.9% larger (than Mi Band 3)
+                AMOLED color full-touch display with adjustable brightness, so
+                everything is clear as can be.</small>
+              <br />
+              <a href="#" class="btn">Buy Now &#8594;</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Testimonial -->
+      <div class="testimonial">
+        <div class="small-container">
+          <div class="row">
+            <div class="col-3">
+              <i class="fas fa-quote-left"></i>
+              <p>
+                We’ve said it time and time again, menswear is ruled by history and tradition. 
+                Every person in menswear (designer, stylist, editor, etc) has taken inspiration from the past at one time or another.
+                 And no era has been overlooked.
+              </p>
+              <div class="rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="far fa-star"></i>
+                <i class="far fa-star"></i>
+                <i class="far fa-star"></i>
+              </div>
+              <img src="https://www.apetogentleman.com/wp-content/uploads/2021/10/Gentleman-720x864.jpg" alt="" />
+              <h3>Mens Fashion </h3>
+            </div>
+      
+            <div class="col-3">
+              <i class="fas fa-quote-left"></i>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Perferendis, quae molestias error id est voluptatibus quos amet
+                numquam aspernatur nam cumque ullam? Veritatis eveniet et, maxime
+                eaque soluta quas modi.
+              </p>
+              <div class="rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="far fa-star"></i>
+                <i class="far fa-star"></i>
+                <i class="far fa-star"></i>
+              </div>
+              <img src="https://media.istockphoto.com/id/1169378197/photo/stylish-shopaholic-with-purchases.jpg?s=612x612&w=0&k=20&c=RGwdnF0wrWV8NNBawXAbzAHUe8sMBpLsEvIICLR9dM4=" alt="" />
+              <h3>Womens Fashion</h3>
+            </div>
+      
+            <div class="col-3">
+              <i class="fas fa-quote-left"></i>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Perferendis, quae molestias error id est voluptatibus quos amet
+                numquam aspernatur nam cumque ullam? Veritatis eveniet et, maxime
+                eaque soluta quas modi.
+              </p>
+              <div class="rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="far fa-star"></i>
+                <i class="far fa-star"></i>
+                <i class="far fa-star"></i>
+              </div>
+              <img src="https://www2.hm.com/content/dam/TOOLBOX/inlocal/in_2022_s6/festive_kids_2023/FESTIVE_KIDS_COMBINE_2x3.jpg" alt="" />
+              <h3>Kids Clothing.</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- brands -->
+      <div class="brands">
+        <div class="small-container">
+          <div class="row">
+            <div class="col-5">
+              <img src="https://i.ibb.co/Gfwzz1S/logo-godrej.png" alt="" />
+            </div>
+      
+            <div class="col-5">
+              <img src="https://i.ibb.co/vjrRZFM/logo-oppo.png" alt="" />
+            </div>
+      
+            <div class="col-5">
+              <img src="https://i.ibb.co/3zs234S/logo-coca-cola.png" alt="" />
+            </div>
+      
+            <div class="col-5">
+              <img src="https://i.ibb.co/7Wt343W/logo-paypal.png" alt="" />
+            </div>
+      
+            <div class="col-5">
+              <img src="https://i.ibb.co/GVSNwJD/logo-philips.png" alt="" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Footer -->
+      <div class="footer">
+        <div class="container">
+          <div class="row">
+            <div class="footer-col-1">
+              <h3>Download Our App</h3>
+              <p>Download App for Android and iso mobile phone.</p>
+              <div class="app-logo">
+                <img src="https://i.ibb.co/KbPTYYQ/play-store.png" alt="" />
+                <img src="https://i.ibb.co/hVM4X2p/app-store.png" alt="" />
+              </div>
+            </div>
+      
+            <div class="footer-col-2">
+              <img src="https://cdn.logojoy.com/wp-content/uploads/2018/05/30171154/944-768x591.png" alt="" />
+              <p>
+                Our Purpose Is To Make Every Customer to Feel Happy For Buying Best Quality Products At Our Store
+              </p>
+            </div>
+      
+            <div class="footer-col-3">
+              <h3>Useful Links</h3>
+              <ul>
+                <li>Coupons</li>
+                <li>Blog Post</li>
+                <li>Return Policy</li>
+                <li>Join Affiliate</li>
+              </ul>
+            </div>
+      
+            <div class="footer-col-4">
+              <h3>Follow us</h3>
+              <ul>
+                <li>Facebook &nbsp; <i class="fab fa-facebook"></i><a href="www.facebook.com">Facebook</a></li>
+                <li>Twitter &nbsp;<i class="fab fa-twitter"></i></li>
+                <li>Instagram &nbsp;<i class="fab fa-instagram"></i></li>
+                <li>YouTube &nbsp;<i class="fab fa-youtube"></i></li>
+              </ul>
+            </div>
+          </div>
+          <hr />
+          <p class="copyright">Copyright &copy; 2021 - Red Store</p>
+        </div>
+      </div>
+     
+      
+      <!-- js for toggle menu -->
+      <script>
+        var MenuItems = document.getElementById('MenuItems');
+        MenuItems.style.maxHeight = '0px';
+      
+        function menutoggle() {
+          if (MenuItems.style.maxHeight == '0px') {
+            MenuItems.style.maxHeight = '200px';
+          } else {
+            MenuItems.style.maxHeight = '0px';
+          }
+        }
+      </script>
+      
+</body>
+</html>

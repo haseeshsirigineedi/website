@@ -1,0 +1,17 @@
+{
+  "dependencies": {
+    "@apideck/node": "^2.9.2",
+    "@chec/commerce.js": "^2.8.0",
+    "axios": "^1.5.1",
+    "ejs": "^3.1.8",
+    "express": "^4.18.1",
+    "firebase-admin": "^11.0.1",
+    "fs": "^0.0.1-security",
+    "fuse": "^0.4.0",
+    "password-hash": "^1.2.2",
+    "simple-git": "^3.19.1"
+  },
+  "scripts": {
+    "start": "node index.js"
+  }
+}

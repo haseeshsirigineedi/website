@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
+
+
+    <title>Shopping Cart</title>
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  } 
+    body {
+    font-family: "Poppins", sans-serif;
+}
+
+.products {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content:center;
+}
+
+.product {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
+
+.add-to-cart {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.cart {
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+.cart-list {
+    list-style: none;
+    padding: 0;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #ccc;
+    margin: 5px 0;
+    padding: 5px 0;
+}
+
+.cart-total {
+    font-weight: bold;
+}
+
+.checkout {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+.navbar {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  nav {
+    flex: 1;
+    text-align: center;
+  }
+  
+  nav ul {
+    display: inline-block;
+    list-style-type: none;
+    text-align: center;
+  }
+  
+  nav ul li {
+    display: inline-block;
+    margin-right: 20px;
+  }
+  
+  a {
+    text-decoration: none;
+    color: #555;
+  }
+  
+  p {
+    color: #555;
+  }
+  
+  .container {
+    max-width: 1300px;
+    margin: auto;
+    padding-left: 25px;
+    padding-right: 25px;
+  }
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
+
+:root {
+  --bodyFonts: 'Josefin Sans', sans-serif;
+  --pinkColor: #5557F3;
+  --titleColor: #000000;
+  --bodyColor: #666666;
+  --lightblueColor: #8D99FF;
+  --whiteColor: #ffffff;
+  --fontSize: 16px;
+  --transition: .5s;
+}
+body {
+  padding: 0;
+  margin: 0;
+  font-family: 'Noto Sans', sans-serif !important;
+}
+a,
+a:hover {
+  text-decoration: none !important;
+}
+img {
+  max-width: 100%;
+}
+hr {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+.pt-100 { padding-top: 100px; }
+.pt-45 { padding-top: 45px; }
+#not_found {
+  text-align: center;
+  color: red;
+}
+.grand-total {
+  margin-top: 1rem;
+  text-align: center;
+  font-weight: 600;
+}
+.table {
+  margin-bottom: 0 !important;
+}
+.default-btn {
+  padding: 12px 25px 10px;
+  text-align: center;
+  color: var(--whiteColor) !important;
+  font-size: var(--fontSize);
+  transition: var(--transition);
+  display: inline-block;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  border-radius: 8px;
+  z-index: 0;
+  background: var(--pinkColor);
+  overflow: hidden;
+  white-space: nowrap;
+  border: 0;
+}
+.default-btn:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 550px;
+  height: 550px;
+  margin: auto;
+  background: var(--lightblueColor);
+  border-radius: 8px;
+  z-index: -1;
+  transform-origin: top center;
+  transform: translateX(-50%) translateY(-5%) scale(0.4);
+  transition: transform .9s;
+}
+.default-btn:hover {
+  color: var(--whiteColor) !important;
+}
+.default-btn:hover:before {
+  transition: transform 1s;
+  transform: translateX(-45%) translateY(0) scale(1);
+  transform-origin: bottom center;
+}
+.btn-success {
+  /* background-color: #F96B6A !important;
+  border-color: #F96B6A !important; */
+  color:black;
+  background-color: #fff;
+
+}
+.featured-area {
+  background-color: #EDEFF9;
+}
+.featured-tab-area .tabs {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  float: right;
+}
+.featured-tab-area .tabs li {
+  display: inline-block;
+  line-height: initial;
+  margin-right: 20px;
+}
+.featured-tab-area .tabs li a {
+  display: inline-block;
+  position: relative;
+  color: var(--titleColor);
+  padding: 13px 26px 10px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.featured-tab-area .tabs li.active a {
+  background-color: var(--pinkColor);
+  color: var(--whiteColor);
+}
+.featured-tab-area .tabs li.current a {
+  background-color: var(--pinkColor);
+  color: var(--whiteColor);
+}
+.featured-tab-area-ml .tabs {
+  margin-top: 0 !important;
+  float: left;
+}
+.tab .tabs_item {
+  display: none;
+}
+.tab .tabs_item:first-child {
+  display: block;
+}
+.featured-item {
+  margin-bottom: 30px;
+  background-color: var(--whiteColor);
+  border-radius: 5px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.featured-item .featured-item-img {
+  position: relative;
+  z-index: 1;
+  transition: 0.3s linear;
+  overflow: hidden;
+}
+.featured-item .featured-item-img a {
+  display: block;
+}
+.featured-item .featured-item-img a img {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border: 4px solid var(--whiteColor);
+  transition: 0.3s linear;
+}
+
+.featured-item .featured-item-img a img:hover {
+  scale: 1.08;
+} 
+
+.featured-item .content {
+  padding: 20px 15px;
+}
+.featured-item .content h3 {
+  margin-bottom: 10px;
+}
+.featured-item .content h3 a {
+  color: var(--titleColor);
+  -webkit-transition: var(--transition);
+  transition: var(--transition);
+  font-weight: bold;
+}
+.featured-item .content .content-in {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 12px 10px;
+  border-radius: 3px;
+}
+.featured-item .content .content-in i {
+  color: #ffcc00;
+}
+.featured-item .content .content-in span {
+  font-size: 15px;
+  color: var(--titleColor);
+  font-weight: 500;
+}
+.featured-item .content .content-in h4 {
+  font-size: 15px;
+  color: var(--titleColor);
+  font-weight: 500;
+  margin-bottom: 0;
+}
+.featured-item .content .featured-content-list {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 0 0;
+}
+.featured-tab-area .tabs li {
+  margin-right: 5px;
+}
+#staticBackdropLabel {
+  font-weight: bold;
+}
+.search-button{
+   font-size: 10px;
+}
+#search_field{
+   width: 300px;
+   height: 50px;
+}
+
+</style>
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+          <div class="navbar">
+            <div class="logo">
+              <a href="index.html"><img src="https://cdn.logojoy.com/wp-content/uploads/2018/05/30171154/944-768x591.png" alt="RedStore" width="125px" /></a>
+            </div>
+            <nav>
+              <ul id="MenuItems">
+                <li><a href="main"><b>Home</b></a></li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <li><a href="dashboard1"><b>Products</b></a></li>&nbsp;&nbsp;&nbsp;&nbsp;
+                <li><a href="#"><b>About</b></a></li>&nbsp;&nbsp;&nbsp;&nbsp;
+                <li><a href="#"><b>Contact</b></a></li>&nbsp;&nbsp;&nbsp;&nbsp;
+                <li><a href="account"><b>Account</b></a></li>&nbsp;&nbsp;
+              </ul>
+            </nav>&nbsp;&nbsp;
+            <i class="fa fa-user" class="menu-icon" style='font-size:30px'></i><br>
+            <a href="signup">$</a>&nbsp;&nbsp;&nbsp;
+            <a href="cart"><img src="https://i.ibb.co/PNjjx3y/cart.png" alt="" width="30px" height="30px" /></a>&nbsp;&nbsp;&nbsp;
+            <i class="fa fa-heart-o"  class="menu-icon" style="font-size:24px"></i>&nbsp;&nbsp;&nbsp;
+            <img src="https://i.ibb.co/6XbqwjD/menu.png" alt="" class="menu-icon" onclick="menutoggle()" />
+            
+          </div>
+          <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
+
+    
+               <span class="navbar-toggler-icon"></span>
+            </button>
+    
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+               <ul class="navbar-nav mr-auto">
+               </ul>
+               
+                  <input type="text" id="search_field" placeholder="Search for products">
+                  <button id="search-button" style="font-size: 25px;">Search</button>
+                  <div id="search-results"></div>
+               
+            </div>
+         </nav>
+
+    <h1>Products</h1>
+    <div class="products">
+        <div class="product">
+            <div class="tab_content current active pt-45">
+                    
+                <div class="tabs_item current">
+                   <div class="row justify-content-center">
+                      <div class="col-lg-3 col-md-6">
+                         <div class="featured-item">
+                            <div class="featured-item-img">
+                               <a href="#">
+                                  <img src="https://add-to-cart-javascript.vercel.app/img/men-1.jpg" alt="Images">
+                               </a>
+                            </div>
+                            <div class="content">
+                               <h3><a href="#">Oxford Shirts</a></h3>
+                               <hr>
+                               <div class="content-in">
+                                  <h4>₹ 1200 </h4>
+                                  <span>(4.9)<i class="fa fa-star"></i></span>
+                               </div>
+                               <hr>
+                            </div>
+                            <button class="add-to-cart" 
+        data-name="Oxford Shirts"
+        data-price="₹ 1200"
+        data-image="https://add-to-cart-javascript.vercel.app/img/men-1.jpg"
+        onclick="addToCart(this)">Add to Cart</button>
+                        </div>
+                            </div>
+                         </div>
+                         </div>
+                         </div>
+        <div class="product">
+               <div class="col-lg-3 col-md-6">
+    <div class="featured-item">
+       <div class="featured-item-img">
+          <a href="#">
+             <img src="https://add-to-cart-javascript.vercel.app/img/women-1.jpg" alt="Images">
+          </a>
+       </div>
+       <div class="content">
+          <h3><a href="#">Tunic</a></h3>
+          <hr>
+          <div class="content-in">
+             <h4>₹ 459 </h4>
+             <span>(4.4)<i class="fa fa-star"></i></span>
+          </div>
+          <hr>
+          
+       </div>
+    </div>
+ </div>
+            <button class="add-to-cart" 
+        data-name="Tunic"
+        data-price="₹ 459"
+        data-image="https://add-to-cart-javascript.vercel.app/img/women-1.jpg"
+        onclick="addToCart(this)">Add to Cart</button>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="featured-item">
+               <div class="featured-item-img">
+                  <a href="#">
+                     <img src="https://add-to-cart-javascript.vercel.app/img/watch-1.jpg" alt="Images">
+                  </a>
+               </div>
+               <div class="content">
+                  <h3><a href="#">Huawei Watch Buds </a></h3>
+                  <hr>
+                  <div class="content-in">
+                     <h4>₹ 4059 </h4>
+                     <span>(4.4)<i class="fa fa-star"></i></span>
+                  </div>
+                  <hr>
+                  </div>
+
+                  <button class="add-to-cart" 
+                           data-name="Huawei Watch Buds"
+                           data-price="₹ 4059"
+                           data-image="https://add-to-cart-javascript.vercel.app/img/watch-1.jpg"
+                           onclick="addToCart(this)">Add to Cart</button>
+                                 </div>
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="product">
+            <div class="col-lg-3 col-md-6">
+                <div class="featured-item">
+                    <div class="featured-item-img">
+                        <a href="#">
+                            <img src="https://add-to-cart-javascript.vercel.app/img/men-1.jpg" alt="Images">
+                        </a>
+                    </div>
+                    <div class="content">
+                        <h3><a href="#">Oxford Shirts</a></h3>
+                        <hr>
+                        <div class="content-in">
+                            <h4>₹ 1200 </h4>
+                            <span>(4.9)<i class="fa fa-star"></i></span>
+                        </div>
+                        <hr>
+                    </div>
+                    <button class="add-to-cart" 
+                           data-name="Oxford Shirts"
+                           data-price="₹ 1200 "
+                           data-image="https://add-to-cart-javascript.vercel.app/img/men-1.jpgL"
+                           onclick="addToCart(this)">Add to Cart</button>
+                                 </div>
+                                 </div>
+                           </div>
+        
+         <div class="product">
+         <div class="col-lg-3 col-md-6">
+            <div class="featured-item">
+               <div class="featured-item-img">
+                  <a href="#">
+                     <img src="https://add-to-cart-javascript.vercel.app/img/women-2.jpg" alt="Images">
+                  </a>
+               </div>
+               <div class="content">
+                  <h3><a href="#">Culotte dress</a></h3>
+                  <hr>
+                  <div class="content-in">
+                     <h4>₹ 2459 </h4>
+                     <span>(4.4)<i class="fa fa-star"></i></span>
+                  </div>
+                  <hr>
+                  <button class="add-to-cart" 
+                  data-name="Culotte dress"
+                  data-price="₹ 2459 "
+                  data-image="https://add-to-cart-javascript.vercel.app/img/women-2.jpg"
+                  onclick="addToCart(this)">Add to Cart</button>
+                        </div>
+               </div>
+            </div>
+         </div>
+         <div class="product">
+            <div class="col-lg-3 col-md-6">
+               <div class="featured-item">
+                  <div class="featured-item-img">
+                     <a href="#">
+                        <img src="https://rukminim2.flixcart.com/image/850/1000/ky7lci80/shoe/d/a/i/8-388892-8-puma-white-quarry-original-imagahqhtkzxjewd.jpeg?q=90" alt="Images">
+                     </a>
+                  </div>
+                  <div class="content">
+                     <h3><a href="#">Cuban Collar Shirt</a></h3>
+                     <hr>
+                     <div class="content-in">
+                        <h4>₹ 499 </h4>
+                        <span>(4.9)<i class="fa fa-star"></i></span>
+                     </div>
+                     <hr>
+                     <button class="add-to-cart" 
+                     data-name="Cuban Collar Shirt"
+                     data-price="₹ 499"
+                     data-image="https://rukminim2.flixcart.com/image/850/1000/ky7lci80/shoe/d/a/i/8-388892-8-puma-white-quarry-original-imagahqhtkzxjewd.jpeg?q=90""
+                     onclick="addToCart(this)">Add to Cart</button>
+                           </div>
+                  </div>
+               </div>
+            </div>
+         <div class="product">
+         <div class="col-lg-3 col-md-6">
+            <div class="featured-item">
+               <div class="featured-item-img">
+                  <a href="#">
+                     <img src="https://add-to-cart-javascript.vercel.app/img/men-3.jpg" alt="Images">
+                  </a>
+               </div>
+               <div class="content">
+                  <h3><a href="#">Cuban Collar Shirt</a></h3>
+                  <hr>
+                  <div class="content-in">
+                     <h4>₹ 499 </h4>
+                     <span>(4.9)<i class="fa fa-star"></i></span>
+                  </div>
+                  <hr>
+                  <button class="add-to-cart" 
+                  data-name="Cuban Collar Shirt"
+                  data-price="₹ 499 "
+                  data-image="https://add-to-cart-javascript.vercel.app/img/men-3.jpg"
+                  onclick="addToCart(this)">Add to Cart</button>
+                        </div>
+               </div>
+            </div>
+         </div>
+         <div class="product">
+         <div class="col-lg-3 col-md-6">
+            <div class="featured-item">
+               <div class="featured-item-img">
+                  <a href="#">
+                     <img src="https://add-to-cart-javascript.vercel.app/img/women-3.jpg" alt="Images">
+                  </a>
+               </div>
+               <div class="content">
+                  <h3><a href="#">Babydoll</a></h3>
+                  <hr>
+                  <div class="content-in">
+                     <h4>₹ 1159 </h4>
+                     <span>(4.0)<i class="fa fa-star"></i></span>
+                  </div>
+                  <hr>
+                  <button class="add-to-cart" 
+                  data-name="Product Name"
+                  data-price="Product Price"
+                  data-image="Product Image URL"
+                  onclick="addToCart(this)">Add to Cart</button>
+                        </div>
+               </div>
+            </div>
+         </div>
+         <div class="product">
+         <div class="col-lg-3 col-md-6">
+            <div class="featured-item">
+               <div class="featured-item-img">
+                  <a href="#">
+                     <img src="https://img.freepik.com/free-photo/young-man-choosing-cloths-menswear-shop_1303-30756.jpg" alt="Images">
+                  </a>
+               </div>
+               <div class="content">
+                  <h3><a href="#">Suits</a></h3>
+                  <hr>
+                  <div class="content-in">
+                     <h4>₹ 2059 </h4>
+                     <span>(4.4)<i class="fa fa-star"></i></span>
+                  </div>
+                  <hr>
+                  <button class="add-to-cart" 
+                  data-name="Suits"
+                  data-price="₹ 2059"
+                  data-image="https://img.freepik.com/free-photo/young-man-choosing-cloths-menswear-shop_1303-30756.jpg"
+                  onclick="addToCart(this)">Add to Cart</button>
+                        </div>
+               </div>
+            </div>
+         </div>
+         <div class="product">
+         <div class="col-lg-3 col-md-6">
+            <div class="featured-item">
+               <div class="featured-item-img">
+                  <a href="#">
+                     <img src="https://add-to-cart-javascript.vercel.app/img/men-4.jpg" alt="Images">
+                  </a>
+               </div>
+               <div class="content">
+                  <h3><a href="#">T-shirt</a></h3>
+                  <hr>
+                  <div class="content-in">
+                     <h4>₹ 700 </h4>
+                     <span>(3.9)<i class="fa fa-star"></i></span>
+                  </div>
+                  <hr>
+                  <button class="add-to-cart" 
+                  data-name="T-shirt"
+                  data-price="700"
+                  data-image="https://add-to-cart-javascript.vercel.app/img/men-4.jpg"
+                  onclick="addToCart(this)">Add to Cart</button>
+                        </div>
+               </div>
+            </div>
+         </div>
+         <div class="product">
+         <div class="col-lg-3 col-md-6">
+            <div class="featured-item">
+               <div class="featured-item-img">
+                  <a href="#">
+                     <img src="https://add-to-cart-javascript.vercel.app/img/women-4.jpg" alt="Images">
+                  </a>
+               </div>
+               <div class="content">
+                  <h3><a href="#">Wrap around</a></h3>
+                  <hr>
+                  <div class="content-in">
+                     <h4>₹ 4059 </h4>
+                     <span>(4.4)<i class="fa fa-star"></i></span>
+                  </div>
+                  <hr>
+                  <button class="add-to-cart" 
+                  data-name="Wrap around"
+                  data-price="₹ 4059"
+                  data-image="https://add-to-cart-javascript.vercel.app/img/women-4.jpg"
+                  onclick="addToCart(this)">Add to Cart</button>
+                        </div>
+               </div>
+            </div>
+         </div>
+         <div class="product">
+         <div class="col-lg-3 col-md-6">
+            <div class="featured-item">
+               <div class="featured-item-img">
+                  <a href="#">
+                     <img src="https://add-to-cart-javascript.vercel.app/img/watch-3.jpg" alt="Images">
+                  </a>
+               </div>
+               <div class="content">
+                  <h3><a href="#">titan Power</a></h3>
+                  <hr>
+                  <div class="content-in">
+                     <h4>₹ 459 </h4>
+                     <span>(4.4)<i class="fa fa-star"></i></span>
+                  </div>
+                  <hr>
+                  <button class="add-to-cart" 
+                  data-name="titan Power"
+                  data-price="₹ 459 "
+                  data-image="https://add-to-cart-javascript.vercel.app/img/watch-3.jpg"
+                  onclick="addToCart(this)">Add to Cart</button>
+                        </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="product">
+           <div class="col-lg-3 col-md-6">
+              <div class="featured-item">
+                 <div class="featured-item-img">
+                    <a href="#">
+                       <img src=" https://5.imimg.com/data5/PM/NF/FA/ANDROID-86350514/1557684915580-jpg-500x500.jpg" alt="Images">
+                    </a>
+                 </div>
+                 <div class="content">
+                    <h3><a href="#">Rayon PLain women cloth</a></h3>
+                    <hr>
+                    <div class="content-in">
+                       <h4>₹ 1200 </h4>
+                       <span>(4.9)<i class="fa fa-star"></i></span>
+                    </div>
+                    <hr>
+                    <button class="add-to-cart" 
+        data-name="Rayon PLain women cloth"
+        data-price="₹ 1200"
+        data-image=" https://5.imimg.com/data5/PM/NF/FA/ANDROID-86350514/1557684915580-jpg-500x500.jpg"
+        onclick="addToCart(this)">Add to Cart</button>
+              </div>
+                 </div>
+              </div>
+           </div>
+           <div class="product">
+           <div class="col-lg-3 col-md-6">
+            <div class="featured-item">
+               <div class="featured-item-img">
+                  <a href="#">
+                     <img src="https://5.imimg.com/data5/PL/PL/MY-62197866/nike-airmax-shoes.jpg" alt="Images">
+                  </a>
+               </div>
+               <div class="content">
+                  <h3><a href="#">Air Jordan</a></h3>
+                  <hr>
+                  <div class="content-in">
+                     <h4>₹ 459 </h4>
+                     <span>(4.4)<i class="fa fa-star"></i></span>
+                  </div>
+                  <hr>
+                  <button class="add-to-cart" 
+                  data-name="Air Jordan"
+                  data-price="₹ 459 "
+                  data-image="https://5.imimg.com/data5/PL/PL/MY-62197866/nike-airmax-shoes.jpg"
+                  onclick="addToCart(this)">Add to Cart</button>
+                        </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   </div>
+   <div class="product">
+   <div class="col-lg-3 col-md-6">
+    <div class="featured-item">
+       <div class="featured-item-img">
+          <a href="#">
+             <img src="https://add-to-cart-javascript.vercel.app/img/watch-4.jpg" alt="Images">
+          </a>
+       </div>
+       <div class="content">
+          <h3><a href="#">titan Power</a></h3>
+          <hr>
+          <div class="content-in">
+             <h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;₹ 459 </h4>
+             <span>(4.4)<i class="fa fa-star"></i></span>
+          </div>
+          <hr>
+          <button class="add-to-cart" 
+        data-name="titan Power"
+        data-price="1500"
+        data-image="https://add-to-cart-javascript.vercel.app/img/watch-4.jpg"
+        onclick="addToCart(this)">Add to Cart</button>
+                   </div>
+            </div>
+         </div>
+      </div>
+</div>
+
+    </div>
+    <h1>Shopping Cart</h1>
+    <div class="cart">
+        <ul class="cart-list"></ul>
+        <p>Total: <span class="cart-total">0.00</span></p>
+        <button class="checkout"><a href="account"><b>Checkout</b></a></button>
+    </div> 
+     
+
+    <script>
+      
+      async function fetchProductData() {
+        try {
+          const response = await fetch('https://fakestoreapi.com/products');
+          const products = await response.json();
+          return products;
+        } catch (error) {
+          console.error('Error fetching product data:', error);
+          throw error;
+        }
+      }
+  
+      async function handleSearch() {
+        const searchInput = document.getElementById('search_field').value.toLowerCase();
+  
+        if (!searchInput) {
+          return; // Don't make an empty search request
+        }
+  
+        const searchResults = document.getElementById('search-results');
+        searchResults.innerHTML = ''; // Clear previous results
+  
+        try {
+          const products = await fetchProductData();
+  
+          const filteredProducts = products.filter(product => product.title.toLowerCase().includes(searchInput));
+  
+          if (filteredProducts.length === 0) {
+            searchResults.innerHTML = '<p>No products found.</p>';
+            return;
+          }
+  
+          filteredProducts.forEach(product => {
+            const productDiv = document.createElement('div');
+            const productId = product.id
+            productDiv.classList.add('product');
+            productDiv.innerHTML = `
+            <div>
+              <div>
+                <img src="${product.image}" alt="Product Image">
+                <h3>${product.title}</h3>
+                <p>Price: $${product.price}</p>
+                <p>Rating: ${product.rating.rate} <i class="fa fa-star"></i></p>
+              </div>
+              <button type="button" data-product-id = ${product.id} onclick="addToCartApi(this)">Add to Cart</button>
+             
+            `;
+            searchResults.appendChild(productDiv);
+          });
+        } catch (error) {
+          console.error('Error fetching product data:', error);
+          searchResults.innerHTML = '<p>Error fetching data. Please try again later.</p>';
+        }
+      }
+  
+      document.getElementById('search-button').addEventListener('click', handleSearch);
+  
+      document.getElementById('search_field').addEventListener('input', function () {
+        if (this.value === '') {
+          document.getElementById('search-results').innerHTML = '';
+        }
+      });
+
+
+      function hideAllProductCards() {
+            const productCards = document.querySelectorAll('.product');
+            productCards.forEach(card => {
+                card.style.display = 'none';
+            });
+        }
+
+        // Function to show search results
+        function showSearchResults(products) {
+            const searchResults = document.getElementById('search-results');
+            searchResults.innerHTML = '';
+
+            if (products.length === 0) {
+                searchResults.innerHTML = '<p>No products found.</p>';
+                return;
+            }
+
+            products.forEach(product => {
+                const productDiv = document.createElement('div');
+                productDiv.classList.add('product');
+                productDiv.innerHTML = `
+                    <div>
+                        <img src="${product.image}" alt="Product Image">
+                        <h3>${product.title}</h3>
+                        <p>Price: $${product.price}</p>
+                        <p>Rating: ${product.rating.rate} <i class="fa fa-star"></i></p>
+                    </div>
+                `;
+                searchResults.appendChild(productDiv);
+            });
+        }
+
+            let sum = 0.00; // Initialize sum as a number with an initial value of 0.00
+
+            function addToCart(button) {
+               // Extract product data from the clicked button
+               const name = button.getAttribute('data-name');
+               const price = parseFloat(button.getAttribute('data-price').replace('₹ ', '')); // Parse the price as a float
+               const image = button.getAttribute('data-image');
+               const totalElement = document.querySelector('.cart-total');
+               
+               sum += price; // Add the price to the sum
+
+               // Update the total displayed in the cart
+               totalElement.textContent = '$' + sum.toFixed(2);
+
+               // Create a cart item
+               const cartItem = document.createElement('li');
+               cartItem.className = 'cart-item';
+               cartItem.innerHTML = `
+                  <div>
+                        <img src="${image}" alt="${name}">
+                        <div>
+                           <h4>${name}</h4>
+                           <p>Price: ₹${price.toFixed(2)}</p>
+                        </div>
+                  </div>
+                  <button class="remove-from-cart">Remove</button>
+               `;
+
+               // Add the cart item to the cart list
+               document.querySelector('.cart-list').appendChild(cartItem);
+
+               // Add a click event to the "Remove" button
+               cartItem.querySelector('.remove-from-cart').addEventListener('click', function () {
+                  // Remove the cart item from the cart list
+                  cartItem.remove();
+
+                  // Deduct the price from the sum
+                  sum -= price;
+
+                  // Update the total displayed in the cart
+                  totalElement.textContent = '$' + sum.toFixed(2);
+               });
+            }
+
+
+
+                  // Function to update the total price
+                  // Initialize the total sum
+
+            async function addToCartApi(button) {
+               console.log(sum)
+               const productId = button.getAttribute('data-product-id');
+               const totalElement = document.querySelector('.cart-total');
+               try {
+                  // Make an API request to fetch product data based on the productId
+                  const response = await fetch(`https://fakestoreapi.com/products/${productId}`);
+
+                  if (!response.ok) {
+                        throw new Error('Failed to fetch product data');
+                  }
+
+                  const productData = await response.json();
+
+                  const name = productData.title; // Use "title" instead of "name" if that's the correct property in your API response
+                  const price = productData.price;
+                  const image = productData.image;
+                  sum += price; // Add the price to the total sum
+                  console.log(sum)
+
+                  // Create a cart item
+                  const cartItem = document.createElement('li');
+                  cartItem.className = 'cart-item';
+                  cartItem.innerHTML = `
+                     <div>
+                           <img src="${image}" alt="${name}">
+                           <div>
+                              <h4>${name}</h4>
+                              <p>Price: $${price}</p>
+                           </div>
+                     </div>
+                     <button class="remove-from-cart" product-price="${price}" onclick="removeFromCartApi(this)">Remove</button>
+                  `;
+
+                  // Add the cart item to the cart list
+                  document.querySelector('.cart-list').appendChild(cartItem);
+
+                  // Calculate and update the total price
+               
+                  totalElement.textContent = '$' + sum.toFixed(2);
+
+                  // Add a click event to the "Remove" button
+                  cartItem.querySelector('.remove-from-cart').addEventListener('click', function () {
+                        // Remove the cart item from the cart list
+                        cartItem.remove();
+
+                        // Calculate and update the total price
+                  
+
+                        // Update the total sum by subtracting the price of the removed item
+                        sum -= parseFloat(price);
+                        totalElement.textContent = '$' + sum.toFixed(2);
+                  });
+               } catch (error) {
+                  console.error('Error adding to cart:', error);
+               }
+            }
+
+
+      
+    </script>
+   </body>
+   
+</html>
+
